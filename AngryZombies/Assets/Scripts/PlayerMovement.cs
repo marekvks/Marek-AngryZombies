@@ -97,7 +97,6 @@ public class PlayerMovement : MonoBehaviour
             dir = "None";
         }
 
-        Debug.Log(dir);
     }
 
     private void Rotate()
@@ -105,7 +104,6 @@ public class PlayerMovement : MonoBehaviour
         mousePosition = Input.mousePosition;
         playerPosition = cam.WorldToScreenPoint(transform.position);
 
-        Debug.Log(mousePosition);
         Vector2 direction = mousePosition - playerPosition;
         angle = new Vector3(direction.x, 0, direction.y);
         transform.rotation = Quaternion.LookRotation(angle);
