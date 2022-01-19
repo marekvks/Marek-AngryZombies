@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
 {
+
+    public Camera cam;
+    private float offset;
+
     // Start is called before the first frame update
     void Start()
     {
