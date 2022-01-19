@@ -37,118 +37,60 @@ public class PlayerMovement : MonoBehaviour
 
         controller.Move(new Vector3(horizontal * speed * Time.deltaTime, 0, vertical * speed * Time.deltaTime));
 
-        switch(horizontal, vertical)
+        switch (horizontal, vertical)
         {
             //  Up - 1
             case (0, 1):
-                if (dir == "NW" || dir == "NE")
-                {
-                    animator.SetInteger("direction", 2);
-                }
-                else
-                {
-                    animator.SetInteger("direction", 1);
-                }
+                Animate(1, 2, 3, 4);  // NSWE
                 break;
             // Down - 2
             case (0, -1):
-                if (dir == "NW" || dir == "NE")
-                {
-                    animator.SetInteger("direction", 2);
-                }
-                else
-                {
-                    animator.SetInteger("direction", 1);
-                }
+                Animate(2, 1, 4, 3);
                 break;
             // Right - 3
             case (1, 0):
-                if (dir == "NE" || dir == "SE")
-                {
-                    animator.SetInteger("direction", 3);
-                }
-                else
-                {
-                    animator.SetInteger("direction", 4);
-                }
+                Animate(3, 4, 2, 1);
                 break;
             // Left - 4
             case (-1, 0):
-                if (dir == "NE" || dir == "SE")
-                {
-                    animator.SetInteger("direction", 4);
-                }
-                else
-                {
-                    animator.SetInteger("direction", 3);
-                }
+                Animate(4, 3, 1, 2);
                 break;
             // Up & Right - 5
             case (1, 1):
-                if (dir == "NW" || dir == "NE")
-                {
-                    animator.SetInteger("direction", 5);
-                }
-                else
-                {
-                    animator.SetInteger("direction", 6);
-                }
+                Animate(5, 8, 7, 6);
                 break;
             // Up & Left - 6
             case (-1, 1):
-                if (dir == "NW" || dir == "NE")
-                {
-                    animator.SetInteger("direction", 6);
-                }
-                else
-                {
-                    animator.SetInteger("direction", 5);
-                }
+                Animate(6, 7, 5, 8);
                 break;
             // Down & Right - 7
             case (1, -1):
-                if (dir == "NW" || dir == "NE")
-                {
-                    animator.SetInteger("direction", 7);
-                }
-                else
-                {
-                    animator.SetInteger("direction", 8);
-                }
+                Animate(7, 6, 8, 5);
                 break;
             // Down & Left -- 8
             case (-1, -1):
-                if (dir == "NW" || dir == "NE")
-                {
-                    animator.SetInteger("direction", 8);
-                }
-                else
-                {
-                    animator.SetInteger("direction", 7);
-                }
+                Animate(8, 5, 6, 7);
                 break;
             default:
                 animator.SetInteger("direction", 0);
                 break;
         }
 
-        Debug.Log("rotation = " + transform.eulerAngles.y);
-
-        if (transform.eulerAngles.y <= 270 && transform.eulerAngles.y > 180)
+        if ((transform.eulerAngles.y <= 45 && transform.eulerAngles.y >= 0) || (transform.eulerAngles.y >= 315 && transform.eulerAngles.y <= 360))
         {
-            dir = "SW";
+            dir = "N";
         }
-        else if (transform.eulerAngles.y <= 180 && transform.eulerAngles.y > 90)
+        else if (transform.eulerAngles.y <= 225 && transform.eulerAngles.y >= 135)
         {
-            dir = "SE";
+            dir = "S";
         }
-        else if (transform.eulerAngles.y <= 90 && transform.eulerAngles.y > 0)
+        else if (transform.eulerAngles.y < 315 && transform.eulerAngles.y > 225)
         {
-            dir = "NE";
+            dir = "W";
         }
-        else if (transform.eulerAngles.y <= 360 && transform.eulerAngles.y > 270)
+        else if (transform.eulerAngles.y < 135 && transform.eulerAngles.y > 45)
         {
-            dir = "NW";
+            dir = "E";
         }
         else
         {
@@ -168,4 +110,24 @@ public class PlayerMovement : MonoBehaviour
         angle = new Vector3(direction.x, 0, direction.y);
         transform.rotation = Quaternion.LookRotation(angle);
     }
+
+    private void Animate(int north, int south, int west, int east)
+    {
+        switch(dir)
+        {
+            case "N":
+                animator.SetInteger("direction", north);
+                break;
+            case "S":
+                animator.SetInteger("direction", south);
+                break;
+            case "W":
+                animator.SetInteger("direction", west);
+                break;
+            case "E":
+                animator.SetInteger("direction", east);
+                break;
+        }
+    }
+
 }
