@@ -7,6 +7,8 @@ public class PlayerCombat : MonoBehaviour
     public Transform gunEndpoint;
     public AudioSource gunAudioSource;
     public AudioClip m16GunSound;
+
+    private float gunRange = 1000f;
     private float currentGunShootInterval = 0.15f;
     private float shootInterval = 0f;
     private float damage = 10f;
@@ -15,46 +17,34 @@ public class PlayerCombat : MonoBehaviour
     RaycastHit hit;
     private bool isPlayed = false;
 
-    /*       |
-     *      /|\
-     *     / | \
-     *    /  |  \
-     *       |
-     *       |
-     *       |
-     * 
-     * well-arranged code here ------> jk i will fix this but ill do it tomorrow
-     * 
-     * 
-     */
-
     private void Update()
     {
         Debug.DrawRay(gunEndpoint.position, transform.forward, Color.red);  // Draw Ray because im stupid and i dont remember wich direction should it point :)
 
         if (Input.GetKey(KeyCode.Mouse0) && Time.time > shootInterval)
         {
-            shootInterval = Time.time + currentGunShootInterval;    // time wtf
+            shootInterval = Time.time + currentGunShootInterval;
             Shoot();    // bang bang
-            muzzleFlash.Stop();
         }
      }
 
     private void Shoot()
     {
+        muzzleFlash.Play();
         gunAudioSource.PlayOneShot(m16GunSound);    // boom!
-        if (!isPlayed)
+        if (Physics.Raycast(gunEndpoint.position, transform.forward, out hit, gunRange, layer))
         {
-            muzzleFlash.Play();     // Play muzzleFlash particle but ... it doesnt work yet :D
-            isPlayed = true;
-        }
-        if (Physics.Raycast(gunEndpoint.position, transform.forward, out hit, Mathf.Infinity, layer))   // Ray Ray Ray Ray Ray Ray Ray Ray Ray Ray Ray Ray Ray Ray Ray Ray
-        {
-            Debug.Log(hit.collider.gameObject.name);                            // Why debug.log? i dont know
-            hit.collider.GetComponent<EnemyHealth>().zombieHealth -= damage;    // Deals damage to the player lol
-        }
+            EnemyHealth zombieHealth = hit.collider.gameObject.GetComponent<EnemyHealth>();
 
+            if (zombieHealth != null)
+            {
+                zombieHealth.TakeDamage();
+            }
+        }
+    }
 
-        isPlayed = false;
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawSphere(gunEndpoint.position, gunRange);
     }
 }

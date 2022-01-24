@@ -4,13 +4,24 @@ using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour
 {
-    public float zombieHealth = 100f;
+    public float currentHealth = 100f;
 
     private void Update()
     {
-        if (zombieHealth <= 0)
+        if (currentHealth <= 0)
         {
-            gameObject.SetActive(false);
+            Die();
         }
+    }
+
+    public void TakeDamage()
+    {
+        currentHealth -= 10;
+    }
+
+    private void Die()
+    {
+        // Play the animation
+        gameObject.SetActive(false);
     }
 }

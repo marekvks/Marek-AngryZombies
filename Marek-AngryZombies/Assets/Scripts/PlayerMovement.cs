@@ -6,7 +6,6 @@ public class PlayerMovement : MonoBehaviour
 {
     private Vector3 angle;
     [Header("Objects/Components")]
-    public Rigidbody rb;
     public CharacterController controller;
     public Camera cam;
     public Animator animator;

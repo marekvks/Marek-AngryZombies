@@ -108,7 +108,7 @@ NavMeshSettings:
     agentTypeID: 0
     agentRadius: 0.5
     agentHeight: 2
-    agentSlope: 45
+    agentSlope: 60
     agentClimb: 0.4
     ledgeDropHeight: 0
     maxJumpAcrossDistance: 0
@@ -1854,7 +1854,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e88e18ebb3c8dea44bdef386f8baa6fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 46743087}
   controller: {fileID: 46743086}
   cam: {fileID: 963194227}
   animator: {fileID: 46743089}
