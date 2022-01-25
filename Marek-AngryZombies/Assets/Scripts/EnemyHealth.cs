@@ -4,7 +4,19 @@ using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour
 {
-    public float currentHealth = 100f;
+    [Header("Objects/Components")]
+    private Animator animator;
+    EnemyMovement EnemyMovement;
+
+    [Header("Variables")]
+    [SerializeField]
+    private float currentHealth = 100f;
+
+    private void Start()
+    {
+        animator = GetComponent<Animator>();
+        EnemyMovement = GetComponent<EnemyMovement>();
+    }
 
     private void Update()
     {
@@ -21,7 +33,12 @@ public class EnemyHealth : MonoBehaviour
 
     private void Die()
     {
-        // Play the animation
+        EnemyMovement.nmAgent.speed = 0;
+        animator.SetBool("dead", true);
+    }
+
+    private void Vanish()
+    {
         gameObject.SetActive(false);
     }
 }

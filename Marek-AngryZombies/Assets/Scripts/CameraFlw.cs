@@ -11,6 +11,6 @@ public class CameraFlw : MonoBehaviour
 
     private void LateUpdate()
     {
-        transform.position = Vector3.Lerp(transform.position, player.position + offset, 0.1f);
+        transform.position = Vector3.Lerp(transform.position, player.position + offset, 0.05f);
     }
 }
