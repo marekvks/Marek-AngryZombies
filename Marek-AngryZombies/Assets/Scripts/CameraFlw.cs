@@ -5,7 +5,9 @@ using UnityEngine;
 public class CameraFlw : MonoBehaviour
 {
     public Transform player;
-    private Vector3 offset = new Vector3(0, 6, -4);
+
+    [Header("Variables")]
+    public Vector3 offset = new Vector3(0, 6, -4);
 
     private void LateUpdate()
     {

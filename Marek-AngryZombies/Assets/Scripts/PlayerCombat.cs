@@ -4,27 +4,44 @@ using UnityEngine;
 
 public class PlayerCombat : MonoBehaviour
 {
+    [Header("Objects/Components")]
     public Transform gunEndpoint;
     public AudioSource gunAudioSource;
-    public AudioClip m16GunSound;
-
-    private float gunRange = 1000f;
-    private float currentGunShootInterval = 0.15f;
-    private float shootInterval = 0f;
-    private float damage = 10f;
     public LayerMask layer;
     public ParticleSystem muzzleFlash;
+
+    [Header("Audio")]
+    public AudioClip m16GunSound;
+
+    [Header("Variables")]
+    private float gunRange = 1000f;
+    private float currentGunShootInterval = 0.1f;
+    private float damage = 10f;
+    private float shootInterval = 0f;
+    private float saveInterval;
+    private float muzzleFlashLifetime = 0.005f;
     RaycastHit hit;
-    private bool isPlayed = false;
+
+    private void Start()
+    {
+        var main = muzzleFlash.main;
+        main.startLifetime = muzzleFlashLifetime;
+    }
 
     private void Update()
     {
-        Debug.DrawRay(gunEndpoint.position, transform.forward, Color.red);  // Draw Ray because im stupid and i dont remember wich direction should it point :)
+        Debug.DrawRay(gunEndpoint.position, transform.forward, Color.red);
 
         if (Input.GetKey(KeyCode.Mouse0) && Time.time > shootInterval)
         {
             shootInterval = Time.time + currentGunShootInterval;
-            Shoot();    // bang bang
+            saveInterval = shootInterval;
+            Shoot();
+        }
+
+        if (Time.time > saveInterval + muzzleFlashLifetime)
+        {
+            muzzleFlash.Stop();
         }
      }
 
@@ -41,10 +58,5 @@ public class PlayerCombat : MonoBehaviour
                 zombieHealth.TakeDamage();
             }
         }
-    }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawSphere(gunEndpoint.position, gunRange);
     }
 }
