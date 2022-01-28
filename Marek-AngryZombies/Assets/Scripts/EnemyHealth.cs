@@ -11,6 +11,7 @@ public class EnemyHealth : MonoBehaviour
     [Header("Variables")]
     [SerializeField]
     private float currentHealth = 100f;
+    public bool isDead = false;
 
     private void Start()
     {
@@ -22,6 +23,7 @@ public class EnemyHealth : MonoBehaviour
     {
         if (currentHealth <= 0)
         {
+            isDead = true;
             Die();
         }
     }

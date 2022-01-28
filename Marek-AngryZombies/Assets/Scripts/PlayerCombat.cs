@@ -10,6 +10,8 @@ public class PlayerCombat : MonoBehaviour
     public LayerMask layer;
     public ParticleSystem muzzleFlash;
 
+    public GameObject cube;
+
     [Header("Audio")]
     public AudioClip m16GunSound;
 
@@ -52,6 +54,12 @@ public class PlayerCombat : MonoBehaviour
         if (Physics.Raycast(gunEndpoint.position, transform.forward, out hit, gunRange, layer))
         {
             EnemyHealth zombieHealth = hit.collider.gameObject.GetComponent<EnemyHealth>();
+
+            Vector3 dopadPosition = hit.point;
+
+            Debug.Log(dopadPosition);
+
+            Instantiate(cube, dopadPosition, Quaternion.identity);
 
             if (zombieHealth != null)
             {

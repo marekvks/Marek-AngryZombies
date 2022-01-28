@@ -19,12 +19,17 @@ public class PlayerMovement : MonoBehaviour
     private float horizontal = 0f;
     private float vertical = 0f;
 
+    public bool canMove = true;
+
     string dir;
 
     void Update()
     {
-        Move();
-        Rotate();
+        if (canMove)
+        {
+            Move();
+            Rotate();
+        }
     }
 
     private void Move()
@@ -83,8 +88,10 @@ public class PlayerMovement : MonoBehaviour
         {
             animator.SetInteger("direction", 0);
         }
-        // Compass
 
+
+
+        // imaginary compass
         if ((transform.eulerAngles.y <= 45 && transform.eulerAngles.y >= 0) || (transform.eulerAngles.y >= 315 && transform.eulerAngles.y <= 360))
         {
             dir = "N";
