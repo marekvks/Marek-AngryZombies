@@ -17,7 +17,6 @@ public class EnemyCombat : MonoBehaviour
     bool canHit = false;
 
     RaycastHit hit;
-    Ray ray;
 
     private void Start()
     {
@@ -26,6 +25,11 @@ public class EnemyCombat : MonoBehaviour
     }
 
     private void Update()
+    {
+        Attack();
+    }
+
+    void Attack()
     {
         Debug.DrawRay(center.position, player.position - transform.position, Color.yellow);
 

@@ -19,18 +19,15 @@ public class EnemyHealth : MonoBehaviour
         EnemyMovement = GetComponent<EnemyMovement>();
     }
 
-    private void Update()
+    public void TakeDamage(float damage)
     {
+        currentHealth -= damage;
+
         if (currentHealth <= 0)
         {
             isDead = true;
             Die();
         }
-    }
-
-    public void TakeDamage(float damage)
-    {
-        currentHealth -= damage;
     }
 
     private void Die()

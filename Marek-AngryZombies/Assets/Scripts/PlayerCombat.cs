@@ -61,7 +61,10 @@ public class PlayerCombat : MonoBehaviour
 
             if (hit.collider.name.Contains("zombie"))
             {
-                Instantiate(blood, hitPosition, Quaternion.LookRotation(angle));
+                GameObject impactParticle = Instantiate(blood);
+
+                impactParticle.transform.position = hit.point;
+
                 EnemyHealth zombieHealth = hit.collider.gameObject.GetComponent<EnemyHealth>();
 
                 if (zombieHealth != null)

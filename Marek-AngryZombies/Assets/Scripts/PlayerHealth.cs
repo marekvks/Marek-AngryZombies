@@ -18,8 +18,10 @@ public class PlayerHealth : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
-    private void Update()
+    public void TakeDamage(float damage)
     {
+        health -= damage;
+
         if (health <= 0)
         {
             if (playerMovement != null && animator != null)
@@ -28,10 +30,5 @@ public class PlayerHealth : MonoBehaviour
                 animator.SetTrigger("dead");
             }
         }
-    }
-
-    public void TakeDamage(float damage)
-    {
-        health -= damage;
     }
 }
