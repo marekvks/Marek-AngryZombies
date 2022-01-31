@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
+    [Header("Objects/Components")]
     private PlayerMovement playerMovement;
     private Animator animator;
 
+    [Header("Variables")]
     [SerializeField]
     private float health = 100f;
 

@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    private Vector3 angle;
     [Header("Objects/Components")]
     public CharacterController controller;
     public Camera cam;
@@ -12,6 +11,10 @@ public class PlayerMovement : MonoBehaviour
 
     private Vector3 mousePosition;
     private Vector3 playerPosition;
+    private Vector3 angle;
+
+    public AudioSource song;
+    public AudioClip pc;
 
     [Header("Variables")]
     [SerializeField]
@@ -20,6 +23,8 @@ public class PlayerMovement : MonoBehaviour
     private float vertical = 0f;
 
     public bool canMove = true;
+
+    private bool paused = false;
 
     string dir;
 

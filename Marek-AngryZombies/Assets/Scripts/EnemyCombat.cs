@@ -4,16 +4,17 @@ using UnityEngine;
 
 public class EnemyCombat : MonoBehaviour
 {
+    [Header("Objects/Components")]
     public Transform player;
-    public LayerMask target;
     public Transform center;
-    private Animator animator;
-    bool canHit = false;
     private EnemyHealth enemyHealth;
     private PlayerHealth playerHealth;
+    private Animator animator;
+    public LayerMask target;
 
     [SerializeField]
     private float damage = 25f;
+    bool canHit = false;
 
     RaycastHit hit;
     Ray ray;
@@ -32,6 +33,7 @@ public class EnemyCombat : MonoBehaviour
         {
             playerHealth = hit.collider.gameObject.GetComponent<PlayerHealth>();
             canHit = true;
+            transform.rotation = Quaternion.LookRotation(-(transform.position - player.position));
         }
         else
         {

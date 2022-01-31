@@ -2633,6 +2633,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 404becd6c113858439db0a81e224b6a7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1133805468778102270, guid: 404becd6c113858439db0a81e224b6a7,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -3186,6 +3191,8 @@ MonoBehaviour:
   controller: {fileID: 46743086}
   cam: {fileID: 963194227}
   animator: {fileID: 46743089}
+  song: {fileID: 963194230}
+  pc: {fileID: 0}
   speed: 400
   canMove: 1
 --- !u!143 &46743086
@@ -3265,7 +3272,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1024
   muzzleFlash: {fileID: 2076681287}
-  cube: {fileID: 8281785128315899173, guid: ea997fa2b3a87774690121c7e7942964, type: 3}
+  impact: {fileID: 100002, guid: c12e1b2a03ce1934ca5c045e15c1acb7, type: 3}
+  blood: {fileID: 100002, guid: c0729c08626bbb04b943cc93557a3a79, type: 3}
   m16GunSound: {fileID: 8300000, guid: 8723f4874d9e0eb47b953fd522d454e0, type: 3}
 --- !u!114 &46743091
 MonoBehaviour:
@@ -24925,7 +24933,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 511e1054e95a54a4fb621102dc6bfdcc, type: 3}
@@ -42535,7 +42543,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.35
+  m_Radius: 0.4942347
   m_Height: 1.9791806
   m_Direction: 1
   m_Center: {x: 0, y: 0.8302803, z: 0}
@@ -42627,10 +42635,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 46743088}
+  center: {fileID: 1563220711}
   target:
     serializedVersion: 2
     m_Bits: 512
-  center: {fileID: 1563220711}
   damage: 25
 --- !u!1001 &1924744326
 PrefabInstance:
@@ -45721,6 +45729,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ef0ba0e820aa5f5418b46f229d16db7e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1073081189688746230, guid: ef0ba0e820aa5f5418b46f229d16db7e,
         type: 3}

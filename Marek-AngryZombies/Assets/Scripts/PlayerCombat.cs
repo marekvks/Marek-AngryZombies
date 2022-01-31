@@ -10,7 +10,8 @@ public class PlayerCombat : MonoBehaviour
     public LayerMask layer;
     public ParticleSystem muzzleFlash;
 
-    public GameObject cube;
+    public GameObject impact;
+    public GameObject blood;
 
     [Header("Audio")]
     public AudioClip m16GunSound;
@@ -50,20 +51,26 @@ public class PlayerCombat : MonoBehaviour
     private void Shoot()
     {
         muzzleFlash.Play();
-        gunAudioSource.PlayOneShot(m16GunSound);    // boom!
-        if (Physics.Raycast(gunEndpoint.position, transform.forward, out hit, gunRange, layer))
+        gunAudioSource.PlayOneShot(m16GunSound);
+
+        if (Physics.Raycast(gunEndpoint.position, transform.forward, out hit, gunRange))
         {
-            EnemyHealth zombieHealth = hit.collider.gameObject.GetComponent<EnemyHealth>();
 
-            Vector3 dopadPosition = hit.point;
+            Vector3 hitPosition = hit.point;
+            Vector2 angle = transform.position - hitPosition;
 
-            Debug.Log(dopadPosition);
-
-            Instantiate(cube, dopadPosition, Quaternion.identity);
-
-            if (zombieHealth != null)
+            if (hit.collider.name.Contains("zombie"))
             {
-                zombieHealth.TakeDamage();
+                Instantiate(blood, hitPosition, Quaternion.LookRotation(angle));
+                EnemyHealth zombieHealth = hit.collider.gameObject.GetComponent<EnemyHealth>();
+
+                if (zombieHealth != null)
+                {
+                    zombieHealth.TakeDamage(damage);
+                }
+            } else
+            {
+                Instantiate(impact, hitPosition, Quaternion.LookRotation(angle));
             }
         }
     }

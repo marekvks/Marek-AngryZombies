@@ -28,9 +28,9 @@ public class EnemyHealth : MonoBehaviour
         }
     }
 
-    public void TakeDamage()
+    public void TakeDamage(float damage)
     {
-        currentHealth -= 10;
+        currentHealth -= damage;
     }
 
     private void Die()
