@@ -3277,6 +3277,7 @@ MonoBehaviour:
   blood: {fileID: 100002, guid: c0729c08626bbb04b943cc93557a3a79, type: 3}
   m16GunSound: {fileID: 8300000, guid: 8723f4874d9e0eb47b953fd522d454e0, type: 3}
   gunSound: {fileID: 0}
+  reloadSound: {fileID: 0}
   cadence: 0
   shootInterval: 0
   reloadTime: 0
@@ -3284,6 +3285,7 @@ MonoBehaviour:
   range: 0
   ammunitionAmmount: 0
   magSize: 0
+  currentRoundsInMag: 0
   ammunitionType: 
 --- !u!114 &46743091
 MonoBehaviour:
@@ -22035,7 +22037,7 @@ PrefabInstance:
     - target: {fileID: 1949047657656365679, guid: 0f2b724b2bf9fc742a185bb0637b63d2,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1949047657656593999, guid: 0f2b724b2bf9fc742a185bb0637b63d2,
         type: 3}
@@ -42780,12 +42782,16 @@ MonoBehaviour:
   M16Object: {fileID: 1743026788}
   m16MuzzleFlash: {fileID: 19800004, guid: 234e5aa95353f0643b0181dc3872cda9, type: 3}
   m16GunSound: {fileID: 8300000, guid: 8723f4874d9e0eb47b953fd522d454e0, type: 3}
+  maxM16Ammo: 200
   UMPObject: {fileID: 371971370}
   umpMuzzleFlash: {fileID: 19800000, guid: cdf14baff693fbc439f8c859529a63a6, type: 3}
   umpGunSound: {fileID: 8300000, guid: 639f56d54bf236b409b5f17d80e6353e, type: 3}
+  maxSMGAmmo: 200
   ShotgunObject: {fileID: 1208503153}
   shotgunMuzzleFlash: {fileID: 19800002, guid: e74af37e539075d428c1f7bd8cdb781d, type: 3}
   shotgunGunSound: {fileID: 8300000, guid: 593e350425996384980fee1fe9997ce5, type: 3}
+  shotgunReloadSound: {fileID: 8300000, guid: beb7e005ae331dd43b27f630bed18cac, type: 3}
+  maxShotgunBolts: 30
 --- !u!4 &1870340715
 Transform:
   m_ObjectHideFlags: 0
