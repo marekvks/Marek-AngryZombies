@@ -23,7 +23,7 @@ public class EnemyMovement : MonoBehaviour
             nmAgent.SetDestination(player.position);
         }
 
-        if (animator !=null)
+        if (animator != null)
         {
             animator.SetFloat("speed", nmAgent.speed);
         }

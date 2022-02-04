@@ -12,6 +12,10 @@ public class EnemyCombat : MonoBehaviour
     private Animator animator;
     public LayerMask target;
 
+    [Header("Audio")]
+    private SoundManager soundManager;
+    public AudioClip zombieHit;
+
     [SerializeField]
     private float damage = 25f;
     bool canHit = false;
@@ -22,6 +26,7 @@ public class EnemyCombat : MonoBehaviour
     {
         enemyHealth = GetComponent<EnemyHealth>();
         animator = gameObject.GetComponent<Animator>();
+        soundManager = FindObjectOfType<SoundManager>();
     }
 
     private void Update()
@@ -54,6 +59,7 @@ public class EnemyCombat : MonoBehaviour
     {
         if (playerHealth != null)
         {
+            soundManager.ZombieSound(zombieHit);
             playerHealth.TakeDamage(damage);
         }
     }

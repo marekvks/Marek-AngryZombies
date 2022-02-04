@@ -6,29 +6,44 @@ public class PlayerCombat : MonoBehaviour
 {
     [Header("Objects/Components")]
     public Transform gunEndpoint;
-    public AudioSource gunAudioSource;
     public LayerMask layer;
-    public ParticleSystem muzzleFlash;
+    public ParticleSystem m16MuzzleFlash;
+    public ParticleSystem umpMuzzleFlash;
+    public ParticleSystem shotgunMuzzleFlash;
+
+    private WeaponSwitching weaponSwitching;
 
     public GameObject impact;
     public GameObject blood;
 
     [Header("Audio")]
+    private SoundManager soundManager;
     public AudioClip m16GunSound;
 
-    [Header("Variables")]
+    /*[Header("Variables")]
     private float gunRange = 1000f;
     private float currentGunShootInterval = 0.1f;
     private float damage = 10f;
-    private float shootInterval = 0f;
-    private float saveInterval;
-    private float muzzleFlashLifetime = 0.005f;
+    private float shootInterval = 0f;*/
+    private float muzzleFlashLifetime = 0.1f;
+    private float stopMuzzleFlashTime;
     RaycastHit hit;
+
+    [Header("Weapon Statistics")]
+    public AudioClip gunSound;
+    public float cadence;
+    public float shootInterval;
+    public float reloadTime;
+    public float damage;
+    public float range;
+    public float ammunitionAmmount;
+    public float magSize;
+    public string ammunitionType;
 
     private void Start()
     {
-        var main = muzzleFlash.main;
-        main.startLifetime = muzzleFlashLifetime;
+        soundManager = FindObjectOfType<SoundManager>();
+        weaponSwitching = FindObjectOfType<WeaponSwitching>();
     }
 
     private void Update()
@@ -37,23 +52,37 @@ public class PlayerCombat : MonoBehaviour
 
         if (Input.GetKey(KeyCode.Mouse0) && Time.time > shootInterval)
         {
-            shootInterval = Time.time + currentGunShootInterval;
-            saveInterval = shootInterval;
+            shootInterval = Time.time + cadence;
+            stopMuzzleFlashTime = Time.time + muzzleFlashLifetime;
             Shoot();
         }
 
-        if (Time.time > saveInterval + muzzleFlashLifetime)
+        if (Time.time > stopMuzzleFlashTime)
         {
-            muzzleFlash.Stop();
+            m16MuzzleFlash.Stop();
+            umpMuzzleFlash.Stop();
+            shotgunMuzzleFlash.Stop();
         }
      }
 
     private void Shoot()
     {
-        muzzleFlash.Play();
-        gunAudioSource.PlayOneShot(m16GunSound);
+        switch(weaponSwitching.currentGun)
+        {
+            case "M16":
+                m16MuzzleFlash.Play();
+                break;
+            case "UMP":
+                umpMuzzleFlash.Play();
+                break;
+            case "Shotgun":
+                shotgunMuzzleFlash.Play();
+                break;
+        }
 
-        if (Physics.Raycast(gunEndpoint.position, transform.forward, out hit, gunRange))
+        soundManager.GunSound(gunSound);
+
+        if (Physics.Raycast(gunEndpoint.position, transform.forward, out hit, range))
         {
 
             Vector3 hitPosition = hit.point;
