@@ -8,6 +8,8 @@ public class SoundManager : MonoBehaviour
     public AudioSource gunSounds;
     public AudioSource zombieSounds;
 
+    public AudioClip reload;
+
     public void ZombieSound(AudioClip audioClip)
     {
         gunSounds.PlayOneShot(audioClip);

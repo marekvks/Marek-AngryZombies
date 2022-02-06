@@ -27,6 +27,7 @@ public class EnemyCombat : MonoBehaviour
         enemyHealth = GetComponent<EnemyHealth>();
         animator = gameObject.GetComponent<Animator>();
         soundManager = FindObjectOfType<SoundManager>();
+        player = GameObject.Find("Player").GetComponent<Transform>();
     }
 
     private void Update()

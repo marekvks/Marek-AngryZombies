@@ -5,8 +5,12 @@ using UnityEngine;
 public class EnemyHealth : MonoBehaviour
 {
     [Header("Objects/Components")]
+    private Collider col;
     private Animator animator;
+
+    [Header("Scripts")]
     EnemyMovement EnemyMovement;
+    ScoreManager scoreManager;
 
     [Header("Variables")]
     [SerializeField]
@@ -17,6 +21,8 @@ public class EnemyHealth : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         EnemyMovement = GetComponent<EnemyMovement>();
+        col = GetComponent<Collider>();
+        scoreManager = FindObjectOfType<ScoreManager>();
     }
 
     public void TakeDamage(float damage)
@@ -32,6 +38,8 @@ public class EnemyHealth : MonoBehaviour
 
     private void Die()
     {
+        scoreManager.AddScore(1f);
+        col.enabled = false;
         EnemyMovement.nmAgent.speed = 0;
         animator.SetBool("dead", true);
     }

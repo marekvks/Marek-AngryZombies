@@ -6,6 +6,8 @@ public class PlayerHealth : MonoBehaviour
 {
     [Header("Objects/Components")]
     private PlayerMovement playerMovement;
+    private UIManager uiManager;
+
     private Animator animator;
 
     [Header("Variables")]
@@ -16,11 +18,13 @@ public class PlayerHealth : MonoBehaviour
     {
         playerMovement = GetComponent<PlayerMovement>();
         animator = GetComponent<Animator>();
+        uiManager = FindObjectOfType<UIManager>();
     }
 
     public void TakeDamage(float damage)
     {
         health -= damage;
+        uiManager.ChangeText(uiManager.health, health.ToString() + "HP");
 
         if (health <= 0)
         {

@@ -12,13 +12,14 @@ public class PlayerCombat : MonoBehaviour
     public ParticleSystem shotgunMuzzleFlash;
 
     private WeaponManager weaponManager;
+    private UIManager uiManager;
 
     public GameObject impact;
     public GameObject blood;
 
     [Header("Audio")]
     private SoundManager soundManager;
-    public AudioClip m16GunSound;
+    public AudioClip m16Reload;
 
     /*[Header("Variables")]
     private float gunRange = 1000f;
@@ -45,15 +46,21 @@ public class PlayerCombat : MonoBehaviour
     private float timeRequired;
     private bool canShoot = true;
     private bool canReload = false;
+    private bool isReloading = false;
 
     private void Start()
     {
         soundManager = FindObjectOfType<SoundManager>();
         weaponManager = FindObjectOfType<WeaponManager>();
+        uiManager = FindObjectOfType<UIManager>();
     }
 
     private void Update()
     {
+
+        uiManager.ChangeText(uiManager.ammoCarrying, ammunitionAmmount.ToString());
+        uiManager.ChangeText(uiManager.ammoInMag, currentRoundsInMag.ToString());
+
         Debug.DrawRay(gunEndpoint.position, transform.forward, Color.red);
 
         if (Input.GetKey(KeyCode.Mouse0) && Time.time > shootInterval && canShoot)
@@ -63,44 +70,68 @@ public class PlayerCombat : MonoBehaviour
             Shoot();
         }
 
-        if (Input.GetKeyDown(KeyCode.R) && currentRoundsInMag < magSize && ammunitionAmmount > 0)
+        if (Input.GetKeyDown(KeyCode.R) && currentRoundsInMag < magSize && ammunitionAmmount > 0 && !isReloading)
         {
+            canShoot = false;
+            isReloading = true;
+            timeRequired = Time.time + reloadTime;
+            canReload = true;
             switch (weaponManager.currentGun)
             {
                 case "Shotgun":
                     soundManager.GunSound(reloadSound);
                     break;
+                case "M16":
+                    soundManager.GunSound(m16Reload);
+                    break;
+                case "UMP":
+                    soundManager.GunSound(m16Reload);
+                    break;
             }
-            canShoot = false;
-            timeRequired = Time.time + reloadTime;
-            canReload = true;
         }
 
         if (Time.time > timeRequired && canReload)
         {
-            float ammoNeeded = magSize - currentRoundsInMag;
+            float ammoNeeded = 0;
             switch (weaponManager.currentGun)
             {
                 case "M16":
+                    ammoNeeded = magSize - currentRoundsInMag;
                     weaponManager.maxM16Ammo -= ammoNeeded;
+                    weaponManager.currentM16AmmoInMag += ammoNeeded;
+                    ammunitionAmmount = weaponManager.maxM16Ammo;
                     break;
                 case "UMP":
+                    ammoNeeded = magSize - currentRoundsInMag;
                     weaponManager.maxSMGAmmo -= ammoNeeded;
+                    weaponManager.currentSMGAmmoInMag += ammoNeeded;
+                    ammunitionAmmount = weaponManager.maxSMGAmmo;
                     break;
                 case "Shotgun":
+                    if (currentRoundsInMag <= 6)
+                    {
+                        ammoNeeded = 1;
+                    }
                     weaponManager.maxShotgunBolts -= ammoNeeded;
+                    weaponManager.currentSBInMag += ammoNeeded;
+                    ammunitionAmmount = weaponManager.maxShotgunBolts;
                     break;
             }
+            
+            //  Change text
+            /***************************************************************************************/
             currentRoundsInMag += ammoNeeded;
             canShoot = true;
+            isReloading = false;
             canReload = false;
         }
-
-        Debug.Log(ammunitionAmmount);
 
         if (currentRoundsInMag <= 0 || ammunitionAmmount <= 0)
         {
             canShoot = false;
+        } else if (currentRoundsInMag > 0 && !canReload)
+        {
+            canShoot = true;
         }
 
         if (Time.time > stopMuzzleFlashTime)
@@ -114,6 +145,21 @@ public class PlayerCombat : MonoBehaviour
     private void Shoot()
     {
         currentRoundsInMag -= 1;
+        switch (weaponManager.currentGun)
+        {
+            case "M16":
+                weaponManager.currentM16AmmoInMag -= 1;
+                break;
+            case "UMP":
+                weaponManager.currentSMGAmmoInMag -= 1;
+                break;
+            case "Shotgun":
+                weaponManager.currentSBInMag -= 1;
+                break;
+        }
+
+        uiManager.ChangeText(uiManager.ammoInMag, currentRoundsInMag.ToString());
+        Debug.Log(currentRoundsInMag.ToString());
 
         switch (weaponManager.currentGun)
         {
@@ -136,7 +182,7 @@ public class PlayerCombat : MonoBehaviour
             Vector3 hitPosition = hit.point;
             Vector2 angle = transform.position - hitPosition;
 
-            if (hit.collider.name.Contains("zombie"))
+            if (hit.collider.name.Contains("Zombie"))
             {
                 GameObject impactParticle = Instantiate(blood);
 

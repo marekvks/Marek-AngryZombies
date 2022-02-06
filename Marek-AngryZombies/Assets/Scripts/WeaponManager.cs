@@ -5,6 +5,8 @@ using UnityEngine;
 public class WeaponManager : MonoBehaviour
 {
     PlayerCombat playerCombat;
+    UIManager uiManager;
+
     public string currentGun;
     private GameObject currentGameObject;
 
@@ -14,6 +16,7 @@ public class WeaponManager : MonoBehaviour
     public ParticleSystem m16MuzzleFlash;
     public AudioClip m16GunSound;
     public float maxM16Ammo = 200f;
+    public float currentM16AmmoInMag = 30f;
     private string m16AmmunitionType = "5.56mm";
 
     [Header("UMP-45")]
@@ -21,6 +24,7 @@ public class WeaponManager : MonoBehaviour
     public ParticleSystem umpMuzzleFlash;
     public AudioClip umpGunSound;
     public float maxSMGAmmo = 200f;
+    public float currentSMGAmmoInMag = 20f;
     private string umpAmmunitionType = ".45";
 
     [Header("Shotgun")]
@@ -29,11 +33,13 @@ public class WeaponManager : MonoBehaviour
     public AudioClip shotgunGunSound;
     public AudioClip shotgunReloadSound;
     public float maxShotgunBolts = 30f;
+    public float currentSBInMag = 6f;
     private string shotgunAmmunitionType = "shotgun bolts";
 
     private void Start()
     {
         playerCombat = FindObjectOfType<PlayerCombat>();
+        uiManager = FindObjectOfType<UIManager>();
         currentGameObject = M16Object;
         M16();
     }
@@ -44,28 +50,14 @@ public class WeaponManager : MonoBehaviour
         {
             M16();
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        else if (Input.GetKeyDown(KeyCode.Alpha2) && currentGun != "UMP")
         {
             UMP();
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        else if (Input.GetKeyDown(KeyCode.Alpha3) && currentGun != "Shotgun")
         {
             Shotgun();
         }
-
-        switch (currentGun)
-        {
-            case "M16":
-                playerCombat.ammunitionAmmount = maxM16Ammo;
-                break;
-            case "UMP":
-                playerCombat.ammunitionAmmount = maxSMGAmmo;
-                break;
-            case "Shotgun":
-                playerCombat.ammunitionAmmount = maxShotgunBolts;
-                break;
-        }
-        Debug.Log($"M16: {maxM16Ammo} SMG: {maxSMGAmmo} Shotgun: {maxShotgunBolts}");
     }
 
     private void M16()
@@ -75,14 +67,15 @@ public class WeaponManager : MonoBehaviour
         currentGameObject = M16Object;
         M16Object.SetActive(true);
         playerCombat.cadence = 0.2f;
-        playerCombat.reloadTime = 0.3f;
+        playerCombat.reloadTime = 2.2f;
         playerCombat.damage = 10f;
         playerCombat.gunSound = m16GunSound;
         playerCombat.range = 10f;
         playerCombat.ammunitionAmmount = maxM16Ammo;
         playerCombat.magSize = 30f;
-        playerCombat.currentRoundsInMag = 30f;
+        playerCombat.currentRoundsInMag = currentM16AmmoInMag;
         playerCombat.ammunitionType = m16AmmunitionType;
+        uiManager.ChangeText(uiManager.currentWeapon, currentGun);
     }
     
     private void UMP()
@@ -92,14 +85,15 @@ public class WeaponManager : MonoBehaviour
         currentGameObject = UMPObject;
         UMPObject.SetActive(true);
         playerCombat.cadence = 0.1f;
-        playerCombat.reloadTime = 0.3f;
+        playerCombat.reloadTime = 2.2f;
         playerCombat.damage = 5f;
         playerCombat.gunSound = umpGunSound;
         playerCombat.range = 6f;
         playerCombat.ammunitionAmmount = maxSMGAmmo;
         playerCombat.magSize = 20f;
-        playerCombat.currentRoundsInMag = 20f;
+        playerCombat.currentRoundsInMag = currentSMGAmmoInMag;
         playerCombat.ammunitionType = umpAmmunitionType;
+        uiManager.ChangeText(uiManager.currentWeapon, currentGun);
     }
     
     private void Shotgun()
@@ -115,8 +109,9 @@ public class WeaponManager : MonoBehaviour
         playerCombat.range = 4f;
         playerCombat.ammunitionAmmount = maxShotgunBolts;
         playerCombat.magSize = 6f;
-        playerCombat.currentRoundsInMag = 6f;
+        playerCombat.currentRoundsInMag = currentSBInMag;
         playerCombat.ammunitionType = shotgunAmmunitionType;
         playerCombat.reloadSound = shotgunReloadSound;
+        uiManager.ChangeText(uiManager.currentWeapon, currentGun);
     }
 }
