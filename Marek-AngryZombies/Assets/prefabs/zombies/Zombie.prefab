@@ -131,7 +131,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   zombieHit: {fileID: 8300000, guid: 395ede5a87f764c42b139ef3d21a7f2d, type: 3}
-  damage: 25
+  damage: 140185
 --- !u!1001 &1353416265049753661
 PrefabInstance:
   m_ObjectHideFlags: 0

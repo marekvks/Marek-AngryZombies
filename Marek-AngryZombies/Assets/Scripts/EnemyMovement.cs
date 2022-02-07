@@ -29,4 +29,9 @@ public class EnemyMovement : MonoBehaviour
             animator.SetFloat("speed", nmAgent.speed);
         }
     }
+
+    public void SetSpeed(float ammount)
+    {
+        nmAgent.speed += ammount;
+    }
 }

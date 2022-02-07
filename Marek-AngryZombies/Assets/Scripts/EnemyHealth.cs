@@ -48,4 +48,9 @@ public class EnemyHealth : MonoBehaviour
     {
         gameObject.SetActive(false);
     }
+
+    public void SetHealth (float ammount)
+    {
+        currentHealth += ammount;
+    }
 }

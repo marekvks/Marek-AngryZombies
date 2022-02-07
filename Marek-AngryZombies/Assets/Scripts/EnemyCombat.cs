@@ -64,4 +64,10 @@ public class EnemyCombat : MonoBehaviour
             playerHealth.TakeDamage(damage);
         }
     }
+
+    public void SetDamage(float ammount)
+    {
+        damage += ammount;
+    }
+
 }

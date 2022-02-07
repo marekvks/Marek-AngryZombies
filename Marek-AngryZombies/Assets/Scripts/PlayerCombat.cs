@@ -119,7 +119,7 @@ public class PlayerCombat : MonoBehaviour
             }
             
             //  Change text
-            /***************************************************************************************/
+            /*******************************************************************************/
             currentRoundsInMag += ammoNeeded;
             canShoot = true;
             isReloading = false;
