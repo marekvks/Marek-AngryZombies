@@ -1070,6 +1070,12 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 89474254}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!198 &93281218 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 1899445778187527241, guid: 6d26930c687818449ab6e92a8c3dfe35,
+    type: 3}
+  m_PrefabInstance: {fileID: 1899445777865614629}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &96080320
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14424,6 +14430,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cdf14baff693fbc439f8c859529a63a6, type: 3}
+--- !u!198 &777028800 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 7298353218844218082, guid: 6d26930c687818449ab6e92a8c3dfe35,
+    type: 3}
+  m_PrefabInstance: {fileID: 1899445777865614629}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &784332286
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14845,6 +14857,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4000014133883218, guid: 60cf315f432990a41b67cef3d41a92f4,
     type: 3}
   m_PrefabInstance: {fileID: 811477824}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &811755704 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 94654050508909766, guid: 6d26930c687818449ab6e92a8c3dfe35,
+    type: 3}
+  m_PrefabInstance: {fileID: 1899445777865614629}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &818601737
 PrefabInstance:
@@ -22590,6 +22608,12 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
+--- !u!1 &1028333380 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4216427172499904926, guid: 6d26930c687818449ab6e92a8c3dfe35,
+    type: 3}
+  m_PrefabInstance: {fileID: 1899445777865614629}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1029906343
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -26196,6 +26220,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4000014133883218, guid: 60cf315f432990a41b67cef3d41a92f4,
     type: 3}
   m_PrefabInstance: {fileID: 1244548582}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1248994833 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2787729294184000888, guid: 6d26930c687818449ab6e92a8c3dfe35,
+    type: 3}
+  m_PrefabInstance: {fileID: 1899445777865614629}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1254731903
 GameObject:
@@ -30870,6 +30900,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1608759895}
   m_PrefabAsset: {fileID: 0}
+--- !u!198 &1615737830 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 1899445779371845802, guid: 6d26930c687818449ab6e92a8c3dfe35,
+    type: 3}
+  m_PrefabInstance: {fileID: 1899445777865614629}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1616783316
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -33329,6 +33365,65 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1812043074}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1818894803 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1870340713, guid: 6d26930c687818449ab6e92a8c3dfe35,
+    type: 3}
+  m_PrefabInstance: {fileID: 1899445777865614629}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1818894805
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1818894803}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ef7d8b3316af7744a6e38087cff27a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponSelected: 0
+  prevWeapon: 0
+  playerCombat: {fileID: 46743090}
+  guns:
+  - gunModel: {fileID: 1248994833}
+    muzzleFlash: {fileID: 93281218}
+    gunShotSound: {fileID: 8300000, guid: 8723f4874d9e0eb47b953fd522d454e0, type: 3}
+    reloadSound: {fileID: 8300000, guid: 9bd940616376039418f17735909b5b07, type: 3}
+    damage: 10
+    range: 10
+    cadence: 0.2
+    ammunition: 200
+    magSize: 30
+    currentRoundsInMag: 30
+    reloadTime: 2.2
+    ammunitionType: 5.56
+  - gunModel: {fileID: 811755704}
+    muzzleFlash: {fileID: 1615737830}
+    gunShotSound: {fileID: 8300000, guid: 639f56d54bf236b409b5f17d80e6353e, type: 3}
+    reloadSound: {fileID: 8300000, guid: 9bd940616376039418f17735909b5b07, type: 3}
+    damage: 5
+    range: 6
+    cadence: 0.1
+    ammunition: 150
+    magSize: 20
+    currentRoundsInMag: 20
+    reloadTime: 2.2
+    ammunitionType: .45
+  - gunModel: {fileID: 1028333380}
+    muzzleFlash: {fileID: 777028800}
+    gunShotSound: {fileID: 8300000, guid: 593e350425996384980fee1fe9997ce5, type: 3}
+    reloadSound: {fileID: 8300000, guid: beb7e005ae331dd43b27f630bed18cac, type: 3}
+    damage: 50
+    range: 4
+    cadence: 1
+    ammunition: 30
+    magSize: 6
+    currentRoundsInMag: 6
+    reloadTime: 0.5
+    ammunitionType: Shotgun Bolts
+  prevGunModel: {fileID: 0}
 --- !u!1001 &1820125499
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -38881,6 +38976,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 46743088}
     - target: {fileID: 1903792675, guid: d041023be00732742ad1f53a6425a151, type: 3}
+      propertyPath: damage
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1903792675, guid: d041023be00732742ad1f53a6425a151, type: 3}
       propertyPath: player
       value: 
       objectReference: {fileID: 46743088}
@@ -39176,6 +39275,18 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 963194227}
+    - target: {fileID: 1870340713, guid: 6d26930c687818449ab6e92a8c3dfe35, type: 3}
+      propertyPath: m_Name
+      value: Weapon
+      objectReference: {fileID: 0}
+    - target: {fileID: 1870340714, guid: 6d26930c687818449ab6e92a8c3dfe35, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1870340714, guid: 6d26930c687818449ab6e92a8c3dfe35, type: 3}
+      propertyPath: currentGun
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 1629535670098699871, guid: 6d26930c687818449ab6e92a8c3dfe35,
         type: 3}
       propertyPath: m_Name
@@ -39240,6 +39351,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2787729294184000888, guid: 6d26930c687818449ab6e92a8c3dfe35,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6d26930c687818449ab6e92a8c3dfe35, type: 3}

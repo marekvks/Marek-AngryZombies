@@ -37,11 +37,12 @@ public class EnemySpawning : MonoBehaviour
             if (count == zombiesSpawned.Count)
             {
                 canSpawn = true;
-            } else if (enemy.active == true)
+            }
+            else if (enemy.activeInHierarchy == true)
             {
-                canSpawn = false;
                 count += 1;
             }
+            canSpawn = false;
         }
 
         if (scoreManager.score == 0f && !isWaveOneActivated)
@@ -82,3 +83,5 @@ public class EnemySpawning : MonoBehaviour
         }
     }
 }
+
+// stop attack when player is dead

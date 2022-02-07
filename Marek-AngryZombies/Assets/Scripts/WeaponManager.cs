@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WeaponManager : MonoBehaviour
 {
-    PlayerCombat playerCombat;
+    /*PlayerCombat playerCombat;
     UIManager uiManager;
 
     public string currentGun;
@@ -113,5 +113,5 @@ public class WeaponManager : MonoBehaviour
         playerCombat.ammunitionType = shotgunAmmunitionType;
         playerCombat.reloadSound = shotgunReloadSound;
         uiManager.ChangeText(uiManager.currentWeapon, currentGun);
-    }
+    }*/
 }

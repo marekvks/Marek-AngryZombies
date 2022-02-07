@@ -648,6 +648,10 @@ MonoBehaviour:
   pauseMenu: {fileID: 0}
   playerMovement: {fileID: 0}
   playerCombat: {fileID: 0}
+  ammoInMag: {fileID: 0}
+  ammoCarrying: {fileID: 0}
+  currentWeapon: {fileID: 0}
+  health: {fileID: 0}
 --- !u!4 &496215080
 Transform:
   m_ObjectHideFlags: 0
@@ -949,7 +953,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 0}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1

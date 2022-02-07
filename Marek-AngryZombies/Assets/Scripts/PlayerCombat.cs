@@ -14,6 +14,8 @@ public class PlayerCombat : MonoBehaviour
     private WeaponManager weaponManager;
     private UIManager uiManager;
 
+                                                                        private WM wM;
+    
     public GameObject impact;
     public GameObject blood;
 
@@ -31,17 +33,32 @@ public class PlayerCombat : MonoBehaviour
     RaycastHit hit;
 
     [Header("Weapon Statistics")]
-    public AudioClip gunSound;
+    public int weaponSelected;
+    public ParticleSystem muzzleFlash;
+    public AudioClip gunShotSound;
+    public AudioClip reloadSound;
+    public float damage;
+    public float range;
+    public float cadence;
+    public float ammunition;
+    public float magSize;
+    public float currentRoundsInMag;
+    public float reloadTime;
+    public string ammunitionType;
+
+    public float shootInterval;
+
+
+    /*public AudioClip gunSound;
     public AudioClip reloadSound;
     public float cadence;
-    public float shootInterval;
     public float reloadTime;
     public float damage;
     public float range;
     public float ammunitionAmmount;
     public float magSize;
     public float currentRoundsInMag;
-    public string ammunitionType;
+    public string ammunitionType;*/
 
     private float timeRequired;
     private bool canShoot = true;
@@ -52,13 +69,14 @@ public class PlayerCombat : MonoBehaviour
     {
         soundManager = FindObjectOfType<SoundManager>();
         weaponManager = FindObjectOfType<WeaponManager>();
+        wM = FindObjectOfType<WM>();
         uiManager = FindObjectOfType<UIManager>();
     }
 
     private void Update()
     {
 
-        uiManager.ChangeText(uiManager.ammoCarrying, ammunitionAmmount.ToString());
+        uiManager.ChangeText(uiManager.ammoCarrying, ammunition.ToString());
         uiManager.ChangeText(uiManager.ammoInMag, currentRoundsInMag.ToString());
 
         Debug.DrawRay(gunEndpoint.position, transform.forward, Color.red);
@@ -70,63 +88,39 @@ public class PlayerCombat : MonoBehaviour
             Shoot();
         }
 
-        if (Input.GetKeyDown(KeyCode.R) && currentRoundsInMag < magSize && ammunitionAmmount > 0 && !isReloading)
+        if (Input.GetKeyDown(KeyCode.R) && currentRoundsInMag < magSize && ammunition > 0 && !isReloading)
         {
             canShoot = false;
             isReloading = true;
             timeRequired = Time.time + reloadTime;
             canReload = true;
-            switch (weaponManager.currentGun)
-            {
-                case "Shotgun":
-                    soundManager.GunSound(reloadSound);
-                    break;
-                case "M16":
-                    soundManager.GunSound(m16Reload);
-                    break;
-                case "UMP":
-                    soundManager.GunSound(m16Reload);
-                    break;
-            }
+
+            soundManager.GunSound(wM.guns[weaponSelected].reloadSound);
         }
 
         if (Time.time > timeRequired && canReload)
         {
             float ammoNeeded = 0;
-            switch (weaponManager.currentGun)
+            if (weaponSelected == 2 && currentRoundsInMag <= 6)
             {
-                case "M16":
-                    ammoNeeded = magSize - currentRoundsInMag;
-                    weaponManager.maxM16Ammo -= ammoNeeded;
-                    weaponManager.currentM16AmmoInMag += ammoNeeded;
-                    ammunitionAmmount = weaponManager.maxM16Ammo;
-                    break;
-                case "UMP":
-                    ammoNeeded = magSize - currentRoundsInMag;
-                    weaponManager.maxSMGAmmo -= ammoNeeded;
-                    weaponManager.currentSMGAmmoInMag += ammoNeeded;
-                    ammunitionAmmount = weaponManager.maxSMGAmmo;
-                    break;
-                case "Shotgun":
-                    if (currentRoundsInMag <= 6)
-                    {
-                        ammoNeeded = 1;
-                    }
-                    weaponManager.maxShotgunBolts -= ammoNeeded;
-                    weaponManager.currentSBInMag += ammoNeeded;
-                    ammunitionAmmount = weaponManager.maxShotgunBolts;
-                    break;
+                ammoNeeded = 1;
             }
-            
-            //  Change text
-            /*******************************************************************************/
+            else
+            { 
+                ammoNeeded = magSize - currentRoundsInMag;
+            }
+
+            wM.guns[weaponSelected].ammunition -= ammoNeeded;
+            wM.guns[weaponSelected].currentRoundsInMag += ammoNeeded;
+            ammunition = wM.guns[weaponSelected].ammunition;
+
             currentRoundsInMag += ammoNeeded;
             canShoot = true;
             isReloading = false;
             canReload = false;
         }
 
-        if (currentRoundsInMag <= 0 || ammunitionAmmount <= 0)
+        if (currentRoundsInMag <= 0 || ammunition <= 0)
         {
             canShoot = false;
         } else if (currentRoundsInMag > 0 && !canReload)
@@ -136,45 +130,21 @@ public class PlayerCombat : MonoBehaviour
 
         if (Time.time > stopMuzzleFlashTime)
         {
-            m16MuzzleFlash.Stop();
-            umpMuzzleFlash.Stop();
-            shotgunMuzzleFlash.Stop();
+            muzzleFlash.Stop();
         }
      }
 
     private void Shoot()
     {
         currentRoundsInMag -= 1;
-        switch (weaponManager.currentGun)
-        {
-            case "M16":
-                weaponManager.currentM16AmmoInMag -= 1;
-                break;
-            case "UMP":
-                weaponManager.currentSMGAmmoInMag -= 1;
-                break;
-            case "Shotgun":
-                weaponManager.currentSBInMag -= 1;
-                break;
-        }
+        wM.guns[weaponSelected].currentRoundsInMag -= 1;
 
         uiManager.ChangeText(uiManager.ammoInMag, currentRoundsInMag.ToString());
         Debug.Log(currentRoundsInMag.ToString());
 
-        switch (weaponManager.currentGun)
-        {
-            case "M16":
-                m16MuzzleFlash.Play();
-                break;
-            case "UMP":
-                umpMuzzleFlash.Play();
-                break;
-            case "Shotgun":
-                shotgunMuzzleFlash.Play();
-                break;
-        }
+        muzzleFlash.Play();
 
-        soundManager.GunSound(gunSound);
+        soundManager.GunSound(gunShotSound);
 
         if (Physics.Raycast(gunEndpoint.position, transform.forward, out hit, range))
         {
