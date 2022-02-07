@@ -37,7 +37,7 @@ public class EnemySpawning : MonoBehaviour
             if (count == zombiesSpawned.Count)
             {
                 canSpawn = true;
-            } else if (zombie)
+            } else if (enemy.active == true)
             {
                 canSpawn = false;
                 count += 1;
