@@ -18,7 +18,7 @@ public class EnemyCombat : MonoBehaviour
 
     [SerializeField]
     private float damage = 25f;
-    bool canHit = false;
+    bool _canHit = false;
 
     RaycastHit hit;
 
@@ -32,7 +32,7 @@ public class EnemyCombat : MonoBehaviour
 
     private void Update()
     {
-        Attack();
+            Attack();
     }
 
     void Attack()
@@ -42,17 +42,17 @@ public class EnemyCombat : MonoBehaviour
         if (Physics.Raycast(center.position, player.position - transform.position, out hit, 2f, target) && enemyHealth.isDead != true)
         {
             playerHealth = hit.collider.gameObject.GetComponent<PlayerHealth>();
-            canHit = true;
+            _canHit = true;
             transform.rotation = Quaternion.LookRotation(-(transform.position - player.position));
         }
         else
         {
-            canHit = false;
+            _canHit = false;
         }
 
         if (animator != null)
         {
-            animator.SetBool("hit", canHit);
+            animator.SetBool("hit", _canHit);
         }
     }
 
@@ -65,7 +65,7 @@ public class EnemyCombat : MonoBehaviour
         }
     }
 
-    public void SetDamage(float ammount)
+    public void AddDamage(float ammount)
     {
         damage += ammount;
     }

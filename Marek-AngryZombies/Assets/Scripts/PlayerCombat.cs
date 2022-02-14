@@ -140,7 +140,6 @@ public class PlayerCombat : MonoBehaviour
         wM.guns[weaponSelected].currentRoundsInMag -= 1;
 
         uiManager.ChangeText(uiManager.ammoInMag, currentRoundsInMag.ToString());
-        Debug.Log(currentRoundsInMag.ToString());
 
         muzzleFlash.Play();
 
