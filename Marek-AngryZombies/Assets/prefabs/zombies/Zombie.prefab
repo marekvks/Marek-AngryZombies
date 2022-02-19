@@ -97,10 +97,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92e185193a0f0d84ab60a5c96bf339d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabs:
-  - {fileID: 7479824418488325831, guid: 1615dbabfd4ef57428536e340109d83b, type: 3}
-  - {fileID: 8300675163600617904, guid: 58fc04739a6f89f4482a28cd7d0d043c, type: 3}
-  - {fileID: 2027777551989031597, guid: b483f4e45af77bf43a53109021e68993, type: 3}
   currentHealth: 100
   isDead: 0
 --- !u!114 &1903792672
@@ -135,7 +131,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   zombieHit: {fileID: 8300000, guid: 395ede5a87f764c42b139ef3d21a7f2d, type: 3}
-  damage: 25
+  damage: 140185
 --- !u!1001 &1353416265049753661
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -8,7 +8,6 @@ public class WM : MonoBehaviour
     public int prevWeapon = 0;
 
     public PlayerCombat playerCombat;
-    public UIManager uiManager;
 
     public List<CurrentGun> guns = new List<CurrentGun>();
     public GameObject prevGunModel;
@@ -16,7 +15,6 @@ public class WM : MonoBehaviour
     [System.Serializable]
     public class CurrentGun
     {
-        public string weaponName;
         public GameObject gunModel;
         public ParticleSystem muzzleFlash;
         public AudioClip gunShotSound;
@@ -55,7 +53,6 @@ public class WM : MonoBehaviour
 
     private void ChangeGun(int index)
     {
-        weaponSelected = index;
         prevGunModel.SetActive(false);
         CurrentGun currentGun = guns[index];
         currentGun.gunModel.SetActive(true);
@@ -72,6 +69,5 @@ public class WM : MonoBehaviour
         playerCombat.currentRoundsInMag = currentGun.currentRoundsInMag;
         playerCombat.reloadTime = currentGun.reloadTime;
         playerCombat.ammunitionType = currentGun.ammunitionType;
-        uiManager.ChangeText(uiManager.currentWeapon, currentGun.weaponName);
     }
 }

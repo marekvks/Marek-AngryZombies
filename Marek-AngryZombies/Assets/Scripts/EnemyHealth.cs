@@ -8,9 +8,6 @@ public class EnemyHealth : MonoBehaviour
     private Collider col;
     private Animator animator;
 
-    [Header("Spawn Pickups")]
-    public List<GameObject> prefabs = new List<GameObject>();
-
     [Header("Scripts")]
     EnemyMovement EnemyMovement;
     ScoreManager scoreManager;
@@ -44,7 +41,6 @@ public class EnemyHealth : MonoBehaviour
         scoreManager.AddScore(1f);
         col.enabled = false;
         EnemyMovement.nmAgent.speed = 0;
-        RandomSpawnAmmo();
         animator.SetBool("dead", true);
     }
 
@@ -53,20 +49,7 @@ public class EnemyHealth : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    private void RandomSpawnAmmo()
-    {
-        int spawnRate = Random.Range(3, 11);    //  30% chance to spawn an ammunition
-        Debug.Log(spawnRate);
-
-        if (spawnRate <= 3)
-        {
-            int randomWeapon = Random.Range(0, 3);
-            GameObject weaponToSpawn = prefabs[randomWeapon];
-            Instantiate(weaponToSpawn, transform.position, Quaternion.identity);
-        }
-    }
-
-    public void AddHealth (float ammount)
+    public void SetHealth (float ammount)
     {
         currentHealth += ammount;
     }

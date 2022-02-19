@@ -6,6 +6,11 @@ public class ScoreManager : MonoBehaviour
 {
     public float score = 0;
 
+    private void Update()
+    {
+        Debug.Log(score);
+    }
+
     public void AddScore(float ammount)
     {
         score += ammount;
