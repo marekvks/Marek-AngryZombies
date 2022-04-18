@@ -50,7 +50,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         //  Up - 1
-        if (horizontal == 0 && vertical == 1)
+        if (horizontal == 0 && vertical == 1)   // Bohužel mě absolutně nenapadá, jak tento kód upravit ://
         {
             Animate(1, 2, 3, 4);  // NSWE
         }
